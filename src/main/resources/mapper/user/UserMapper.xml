@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.join.joinblog.mapper.user.UserMapper">
+    <resultMap id="user" type="com.join.joinblog.entity.user.User">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="sex" column="sex"/>
+    </resultMap>
+
+    <select id="login" resultType="user">
+        SELECT *
+        FROM t_blog
+        WHERE username=#{user.username} and password=#{user.password}
+    </select>
+
+    <insert id="addUser">
+        INSERT INTO t_blog
+        (username, password)
+        VALUES (#{user.username}, #{user.password})
+    </insert>
+
+    <select id="listUser" resultType="user">
+        SELECT *
+        FROM t_blog
+    </select>
+
+    <update id="updateUser">
+        UPDATE t_blog
+        SET username=#{user.username},password=#{user.password},sex=#{user.sex}
+        WHERE id=#{user.id}
+    </update>
+
+    <delete id="deleteUser">
+        DELETE FROM t_blog
+        WHERE id=#{user.id}
+    </delete>
+
+    <update id="uploadHead">
+        UPDATE t_blog
+        SET headUrl=#{user.headUrl},path=#{user.path}
+        WHERE id=#{user.id}
+    </update>
+
+</mapper>

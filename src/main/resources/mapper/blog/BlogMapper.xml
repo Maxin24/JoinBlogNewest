@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.join.joinblog.mapper.blog.BlogMapper">
+    <resultMap id="BlogResultMap" type="com.join.joinblog.entity.blog.Blog">
+        <id column="id" property="id"/>
+        <result column="pv" property="pv"/>
+        <result column="bloggerName" property="bloggerName"/>
+        <result column="releaseTime" property="releaseTime"/>
+        <result column="releaseDate" property="releaseDate"/>
+        <result column="commentsId" property="commentsId"/>
+        <result column="bloggerId" property="bloggerId"/>
+        <result column="tags" property="tags"/>
+        <result column="title" property="title"/>
+        <result column="mdUrl" property="mdUrl"/>
+        <result column="htmlUrl" property="htmlUrl"/>
+    </resultMap>
+
+    <insert id="addBlog">
+        insert into t_artical (pv,releaseTime,releaseDate,bloggerId,bloggerName,title)
+        values (#{pv},#{releaseTime},#{releaseDate},#{bloggerId},#{bloggerName},#{title});
+    </insert>
+
+    <select id="queryByTag" resultType="com.join.joinblog.entity.blog.Blog">
+        select * from t_artical where tags like "%"#{tag}"%";
+    </select>
+
+    <select id="fuzzyQueryByTitle" resultType="com.join.joinblog.entity.blog.Blog">
+        select * from t_artical where title like "%"#{title}"%";
+    </select>
+
+    <select id="queryById" resultType="com.join.joinblog.entity.blog.Blog">
+        select * from t_artical where id=#{id};
+    </select>
+
+    <select id="queryAll" resultType="com.join.joinblog.entity.blog.Blog">
+        select * from t_artical;
+    </select>
+
+    <select id="queryByBloggerId" resultType="com.join.joinblog.entity.blog.Blog" parameterType="int">
+        select * from t_artical where bloggerId=#{bloggerId};
+    </select>
+
+    <update id="updatePvById" parameterType="int">
+        update t_artical set pv=#{pv} where id=#{id};
+    </update>
+
+    <update id="updateCommentsIdById" parameterType="com.join.joinblog.entity.blog.Blog">
+        update t_artical set commentsId=#{commentsId} where id=#{id};
+    </update>
+
+    <update id="updateTagsById" parameterType="com.join.joinblog.entity.blog.Blog">
+        update t_artical set tags=#{tags} where id=#{id};
+    </update>
+
+    <update id="updateTitleById" parameterType="com.join.joinblog.entity.blog.Blog">
+        update t_artical set title=#{title} where id=#{id};
+    </update>
+
+    <update id="updateTags">
+        update t_artical set tags=#{tags} where id=#{id};
+    </update>
+
+    <delete id="deleteById" parameterType="int">
+        delete from t_artical where id=#{id};
+    </delete>
+
+    <select id="getBlogIds" resultType="int">
+        select id from t_artical;
+    </select>
+</mapper>

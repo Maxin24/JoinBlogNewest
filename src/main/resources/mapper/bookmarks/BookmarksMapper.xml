@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.join.joinblog.mapper.bookmarks.BookmarksMapper">
+    <resultMap id="bookmarks" type="com.join.joinblog.entity.bookmarks.Bookmarks">
+        <id property="id" column="id"/>
+        <result property="bookmarksName" column="bookmarksName"/>
+        <result property="blogId" column="blogId"/>
+    </resultMap>
+
+    <insert id="addBookmarks">
+      INSERT INTO t_bookmarks
+      (bookmarksName)
+      values (#{bookmarks.bookmarksName})
+    </insert>
+
+    <delete id="delBookmarks">
+      DELETE FROM t_bookmarks where id = #{id}
+    </delete>
+
+    <delete id="delBookmarksByName">
+      DELETE FROM t_bookmarks where bookmarksName = #{bookmarksName}
+    </delete>
+
+    <select id="listBookmarks" resultType="bookmarks">
+      SELECT * FROM t_bookmarks
+    </select>
+
+    <select id="queryBookmarks" resultType="bookmarks">
+      SELECT * FROM t_bookmarks where bookmarksName like "%"#{bookmarksName}"%"
+    </select>
+
+    <select id="queryBlogId" resultType="bookmarks">
+      SELECT * FROM t_bookmarks where bookmarksName = #{bookmarksName}
+    </select>
+
+    <update id="updateBookmarks">
+      update t_bookmarks set bookmarksName = #{bookmarksName} where id = #{id}
+    </update>
+
+    <insert id="addBlogId">
+      update t_bookmarks set blogId = #{blogId} where bookmarksName = #{bookmarksName}
+    </insert>
+
+
+
+</mapper>

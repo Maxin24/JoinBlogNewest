@@ -1,0 +1,22 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://47.103.10.220/db_joinblog?autoReconnect=true&useSSL=false&characterEncoding=utf-8
+    username: root
+    password: Join666
+server:
+    port: 8088
+
+mybatis:
+  type-aliases-package: com.join.joinblog
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+
+---
+spring:
+  profiles: prod
+  datasource:
+    url: jdbc:mysql://47.103.10.220/db_test?autoReconnect=true&useSSL=false&characterEncoding=utf-8
+    username: root
+    password: Join666
