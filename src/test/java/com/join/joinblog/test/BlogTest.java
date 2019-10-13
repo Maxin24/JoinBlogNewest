@@ -43,4 +43,9 @@ public class BlogTest {
 //    public void testDeleteById(){
 //        System.out.println(blogService.deleteById(122));
 //    }
+
+    @Test
+    public void testFuzzyQuery(){
+        System.out.println(blogService.fuzzyQueryByBLoggerNameOrTitle("java"));
+    }
 }

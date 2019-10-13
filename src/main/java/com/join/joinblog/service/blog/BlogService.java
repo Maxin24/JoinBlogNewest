@@ -12,6 +12,7 @@ import java.util.List;
 public interface BlogService {
     int addBLog(int bloggerId, String title,String bloggerName);
 
+    List fuzzyQueryByBLoggerNameOrTitle(String input);
     List fuzzyQueryByTitle(String title);
     Blog queryById(int id);
     List queryByBloggerId(int bloggerId);
@@ -23,7 +24,7 @@ public interface BlogService {
     List getAllOrderByDate();
     List getSomeOrderByDate(int num);
 
-    int updateTitleById(String title, int id);
+    boolean updateTitleById(String title, int id);
     int updatePvById(int id);
     int updateCommentsIdById(String commentsId, int id);
     int updateTagsById(String tags, int id);

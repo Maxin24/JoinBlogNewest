@@ -84,4 +84,8 @@
     <select id="getSomeOrderByDate" resultType="com.join.joinblog.entity.blog.Blog">
         select * from t_artical order by releaseDate desc,releaseTime desc limit 0,#{num};
     </select>
+
+    <select id="fuzzyQueryByBLoggerNameOrTitle" resultType="com.join.joinblog.entity.blog.Blog">
+        select * from t_artical where title like "%"#{input}"%" or bloggerName like "%"#{input}"%" order by pv desc ,releaseDate desc,releaseTime desc;
+    </select>
 </mapper>

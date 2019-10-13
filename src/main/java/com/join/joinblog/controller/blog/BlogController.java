@@ -1,5 +1,6 @@
 package com.join.joinblog.controller.blog;
 
+import com.join.joinblog.controller.util.UtilController;
 import com.join.joinblog.entity.blog.Blog;
 import com.join.joinblog.service.blog.impl.BlogServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ import java.util.List;
 public class BlogController {
     @Autowired
     private BlogServiceImpl blogService;
+
+    @Autowired
+    private UtilController utilController;
     /**
      * 测试用
      * @return
@@ -94,6 +98,10 @@ public class BlogController {
         blogService.updateTagsById(tags,id);
     }
 
+    /**
+     * 返回所有博客id
+     * @return
+     */
     @RequestMapping("getBlogIds")
     public int[] getBlogIds(){
         return blogService.getBlogIds();
@@ -101,10 +109,46 @@ public class BlogController {
 
     /**
      * 删除博客
-     * @param id
+     * @param da
      */
     @RequestMapping("/delete")
-    public boolean deleteById(@RequestBody int id){
-        return blogService.deleteById(id);
+    public int deleteById(@RequestBody int da){
+        if(blogService.deleteById(da))
+            return 1;
+        return 0;
     }
+
+    @RequestMapping("/getAllSBT")
+    public List getAllSortByTime(){
+        return blogService.getAllOrderByDate();
+    }
+
+    @RequestMapping("/getAllSBPV")
+    public List getAllSortByPv(){
+        return blogService.getAllOrderByPv();
+    }
+
+    @RequestMapping("/getSomeSBT")
+    public List getSomeSortByTime(@RequestBody int num){
+        return blogService.getSomeOrderByPv(num);
+    }
+
+    @RequestMapping("/getSomeSBPV")
+    public List getSomeSortByPv(@RequestBody int num){
+        return blogService.getSomeOrderByPv(num);
+    }
+
+    @RequestMapping("/fuzzyQuery")
+    public List fuzzyQueryAll(@RequestBody String input){
+        return blogService.fuzzyQueryByBLoggerNameOrTitle(input);
+    }
+
+    @RequestMapping("/updateTitle")
+    public boolean updateTitle(@RequestBody int id,@RequestBody String title){
+        if(blogService.updateTitleById(title, id)){
+            return true;
+        }
+        return false;
+    }
+
 }

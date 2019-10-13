@@ -17,6 +17,7 @@ import java.util.List;
 public interface BlogMapper {
     int addBlog(int pv, String releaseTime,String releaseDate, int bloggerId,String bloggerName, String title);
 
+    List fuzzyQueryByBLoggerNameOrTitle(@Param("input") String input);
     List fuzzyQueryByTitle(@Param("title") String title);
     Blog queryById(@Param("id") int id);
     List queryByBloggerId(@Param("bloggerId") int bloggerId);
