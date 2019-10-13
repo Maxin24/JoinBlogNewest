@@ -7,7 +7,7 @@ spring:
     username: root
     password: Join666
 server:
-    port: 8088
+    port: 8090
 
 mybatis:
   type-aliases-package: com.join.joinblog
