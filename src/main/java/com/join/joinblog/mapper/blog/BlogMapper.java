@@ -15,16 +15,26 @@ import java.util.List;
 @Repository
 @Mapper
 public interface BlogMapper {
-    void addBlog(int pv, String releaseTime,String releaseDate, int bloggerId,String bloggerName, String title);
+    int addBlog(int pv, String releaseTime,String releaseDate, int bloggerId,String bloggerName, String title);
+
     List fuzzyQueryByTitle(@Param("title") String title);
     Blog queryById(@Param("id") int id);
     List queryByBloggerId(@Param("bloggerId") int bloggerId);
     List queryByTag(@Param("tag") String tag);
     List queryAll();
-    void updateTitleById(@Param("title") String title, @Param("id") int id);
-    void updatePvById(@Param("pv") int pv, @Param("id") int id);
-    void updateCommentsIdById(@Param("commentsId") String commentsId, @Param("id") int id);
-    void updateTagsById(@Param("tags") String tags, @Param("id") int id);
-    void deleteById(@Param("id") int id);
+    List getAllOrderByPv();
+    List getSomeOrderByPv(@Param("num") int num);
+    List getAllOrderByDate();
+    List getSomeOrderByDate(@Param("num") int num);
     int[] getBlogIds();
+
+    int updateTitleById(@Param("title") String title, @Param("id") int id);
+    int updatePvById(@Param("pv") int pv, @Param("id") int id);
+    int updateCommentsIdById(@Param("commentsId") String commentsId, @Param("id") int id);
+    int updateTagsById(@Param("tags") String tags, @Param("id") int id);
+
+    int deleteById(@Param("id") int id);
+
+
+
 }

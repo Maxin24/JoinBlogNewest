@@ -68,4 +68,20 @@
     <select id="getBlogIds" resultType="int">
         select id from t_artical;
     </select>
+
+    <select id="getAllOrderByPv" resultType="com.join.joinblog.entity.blog.Blog">
+        select * from t_artical order by pv desc ;
+    </select>
+
+    <select id="getSomeOrderByPv" resultType="com.join.joinblog.entity.blog.Blog">
+        select * from t_artical order by pv desc limit 0,#{num};
+    </select>
+
+    <select id="getAllOrderByDate" resultType="com.join.joinblog.entity.blog.Blog">
+        select * from t_artical order by releaseDate desc,releaseTime desc;
+    </select>
+
+    <select id="getSomeOrderByDate" resultType="com.join.joinblog.entity.blog.Blog">
+        select * from t_artical order by releaseDate desc,releaseTime desc limit 0,#{num};
+    </select>
 </mapper>

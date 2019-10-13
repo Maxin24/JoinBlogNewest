@@ -27,19 +27,19 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public void updateTitleById(String title, int id) {
-        blogMapper.updateTitleById(title,id);
+    public int updateTitleById(String title, int id) {
+        return blogMapper.updateTitleById(title,id);
     }
 
     @Override
-    public void addBLog(int bloggerId,String title,String bloggerName) {
+    public int addBLog(int bloggerId,String title,String bloggerName) {
         Date date=new Date();
         SimpleDateFormat dateFormat1=new SimpleDateFormat("yyyy年MM月dd日");
         SimpleDateFormat dateFormat2=new SimpleDateFormat("HH:mm");
         String releaseDate=dateFormat1.format(date);
         String releaseTime=dateFormat2.format(date);
 
-        blogMapper.addBlog(0,releaseTime,releaseDate,bloggerId,bloggerName,title);
+        return blogMapper.addBlog(0,releaseTime,releaseDate,bloggerId,bloggerName,title);
     }
 
     @Override
@@ -58,9 +58,9 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public void updatePvById(int id) {
+    public int updatePvById(int id) {
         Blog blog=blogMapper.queryById(id);
-        blogMapper.updatePvById(blog.getPv()+1,id);
+        return blogMapper.updatePvById(blog.getPv()+1,id);
     }
 
     @Override
@@ -69,22 +69,44 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public void updateCommentsIdById(String commentsId, int id) {
-        blogMapper.updateCommentsIdById(commentsId,id);
+    public int updateCommentsIdById(String commentsId, int id) {
+        return blogMapper.updateCommentsIdById(commentsId,id);
     }
 
     @Override
-    public void updateTagsById(String tags, int id) {
-        blogMapper.updateTagsById(tags,id);
+    public int updateTagsById(String tags, int id) {
+        return blogMapper.updateTagsById(tags,id);
     }
 
     @Override
-    public void deleteById(int id) {
-        blogMapper.deleteById(id);
+    public boolean deleteById(int id) {
+        if(blogMapper.deleteById(id)!=0)
+            return true;
+        return false;
     }
 
     @Override
     public int[] getBlogIds() {
         return blogMapper.getBlogIds();
+    }
+
+    @Override
+    public List getAllOrderByPv() {
+        return blogMapper.getAllOrderByPv();
+    }
+
+    @Override
+    public List getSomeOrderByPv(int num) {
+        return blogMapper.getSomeOrderByPv(num);
+    }
+
+    @Override
+    public List getAllOrderByDate() {
+        return blogMapper.getAllOrderByDate();
+    }
+
+    @Override
+    public List getSomeOrderByDate(int num) {
+        return blogMapper.getSomeOrderByDate(num);
     }
 }

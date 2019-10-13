@@ -99,8 +99,12 @@ public class BlogController {
         return blogService.getBlogIds();
     }
 
+    /**
+     * 删除博客
+     * @param id
+     */
     @RequestMapping("/delete")
-    public void deleteById(@RequestBody int id){
-        blogService.deleteById(id);
+    public boolean deleteById(@RequestBody int id){
+        return blogService.deleteById(id);
     }
 }

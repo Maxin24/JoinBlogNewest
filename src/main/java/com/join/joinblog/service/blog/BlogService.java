@@ -10,16 +10,25 @@ import java.util.List;
  * @Description:
  */
 public interface BlogService {
-    void addBLog(int bloggerId, String title,String bloggerName);
+    int addBLog(int bloggerId, String title,String bloggerName);
+
     List fuzzyQueryByTitle(String title);
     Blog queryById(int id);
     List queryByBloggerId(int bloggerId);
     List queryByTag(String tag);
     List queryAll();
-    void updateTitleById(String title, int id);
-    void updatePvById(int id);
-    void updateCommentsIdById(String commentsId, int id);
-    void updateTagsById(String tags, int id);
-    void deleteById(int id);
     int[] getBlogIds();
+    List getAllOrderByPv();
+    List getSomeOrderByPv(int num);
+    List getAllOrderByDate();
+    List getSomeOrderByDate(int num);
+
+    int updateTitleById(String title, int id);
+    int updatePvById(int id);
+    int updateCommentsIdById(String commentsId, int id);
+    int updateTagsById(String tags, int id);
+
+    boolean deleteById(int id);
+
+
 }
