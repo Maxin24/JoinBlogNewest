@@ -33,6 +33,8 @@ public interface BlogMapper {
     int updatePvById(@Param("pv") int pv, @Param("id") int id);
     int updateCommentsIdById(@Param("commentsId") String commentsId, @Param("id") int id);
     int updateTagsById(@Param("tags") String tags, @Param("id") int id);
+    int updateHtmlUrlById(@Param("htmlUrl") String htmlUrl,@Param("id") int id);
+    int updateMdUrlById(@Param("mdUrl") String MdUrl,@Param("id") int id);
 
     int deleteById(@Param("id") int id);
 

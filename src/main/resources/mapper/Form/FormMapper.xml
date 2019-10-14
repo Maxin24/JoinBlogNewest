@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.join.joinblog.mapper.form.FormMapper">
+    <resultMap id="form" type="com.join.joinblog.entity.form.Form">
+        <id property="id" column="id"/>
+    </resultMap>
+    <insert id="addForm">
+        INSERT INTO t_form
+        (name,age,department,college,major,grade,rankfirst,ranksecond,phone,QQ,Email,introduce)
+        VALUES (#{form.name},#{form.age},#{form.department},#{form.college},#{form.major},#{form.grade},#{form.rank1},#{form.rank2},#{form.phone},#{form.QQ},#{form.mail},#{form.introduce})
+    </insert>
+</mapper>

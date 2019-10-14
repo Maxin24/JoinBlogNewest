@@ -60,6 +60,14 @@
     <update id="updateTags">
         update t_artical set tags=#{tags} where id=#{id};
     </update>
+    
+    <update id="updateHtmlUrlById">
+        update t_artical set htmlUrl=#{htmlUrl} where id=#{id};
+    </update>
+
+    <update id="updateMdUrlById">
+        update t_artical set mdUrl=#{mdUrl} where id=#{id};
+    </update>
 
     <delete id="deleteById" parameterType="int">
         delete from t_artical where id=#{id};

@@ -48,4 +48,10 @@ public class BlogTest {
     public void testFuzzyQuery(){
         System.out.println(blogService.fuzzyQueryByBLoggerNameOrTitle("java"));
     }
+
+    @Test
+    public void testUpdateUrl(){
+        System.out.println(blogService.updateHtmlUrlById("1",115));
+        System.out.println(blogService.updateMdUrlById("1",115));
+    }
 }

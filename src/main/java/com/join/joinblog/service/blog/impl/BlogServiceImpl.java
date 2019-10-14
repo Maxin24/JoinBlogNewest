@@ -118,4 +118,18 @@ public class BlogServiceImpl implements BlogService {
     public List fuzzyQueryByBLoggerNameOrTitle(String input) {
         return blogMapper.fuzzyQueryByBLoggerNameOrTitle(input);
     }
+
+    @Override
+    public boolean updateHtmlUrlById(String htmlUrl, int id) {
+        if(blogMapper.updateHtmlUrlById(htmlUrl, id)!=0)
+            return true;
+        return false;
+    }
+
+    @Override
+    public boolean updateMdUrlById(String mdUrl, int id) {
+        if(blogMapper.updateMdUrlById(mdUrl, id)!=0)
+            return true;
+        return false;
+    }
 }

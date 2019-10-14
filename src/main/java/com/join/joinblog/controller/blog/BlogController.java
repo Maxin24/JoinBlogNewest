@@ -117,6 +117,15 @@ public class BlogController {
             return 1;
         return 0;
     }
+    @RequestMapping("/getAllInTwoWays")
+    public List getAllInTwoWays(@RequestBody int tag){
+        if(tag==1)
+            return blogService.getAllOrderByDate();
+        else if(tag==0)
+            return blogService.getAllOrderByPv();
+
+        return null;
+    }
 
     @RequestMapping("/getAllSBT")
     public List getAllSortByTime(){

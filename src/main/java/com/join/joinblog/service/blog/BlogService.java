@@ -25,6 +25,8 @@ public interface BlogService {
     List getSomeOrderByDate(int num);
 
     boolean updateTitleById(String title, int id);
+    boolean updateHtmlUrlById(String htmlUrl,int id);
+    boolean updateMdUrlById(String mdUrl,int id);
     int updatePvById(int id);
     int updateCommentsIdById(String commentsId, int id);
     int updateTagsById(String tags, int id);
