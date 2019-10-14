@@ -26,10 +26,7 @@ public class BlogServiceImpl implements BlogService {
         return blogMapper.fuzzyQueryByTitle(title);
     }
 
-    @Override
-    public int updateTitleById(String title, int id) {
-        return blogMapper.updateTitleById(title,id);
-    }
+
 
     @Override
     public int addBLog(int bloggerId,String title,String bloggerName) {
@@ -86,6 +83,13 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    public boolean updateTitleById(String title, int id) {
+        if(blogMapper.updateTitleById(title,id)!=0)
+            return true;
+        return false;
+    }
+
+    @Override
     public int[] getBlogIds() {
         return blogMapper.getBlogIds();
     }
@@ -108,5 +112,24 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public List getSomeOrderByDate(int num) {
         return blogMapper.getSomeOrderByDate(num);
+    }
+
+    @Override
+    public List fuzzyQueryByBLoggerNameOrTitle(String input) {
+        return blogMapper.fuzzyQueryByBLoggerNameOrTitle(input);
+    }
+
+    @Override
+    public boolean updateHtmlUrlById(String htmlUrl, int id) {
+        if(blogMapper.updateHtmlUrlById(htmlUrl, id)!=0)
+            return true;
+        return false;
+    }
+
+    @Override
+    public boolean updateMdUrlById(String mdUrl, int id) {
+        if(blogMapper.updateMdUrlById(mdUrl, id)!=0)
+            return true;
+        return false;
     }
 }

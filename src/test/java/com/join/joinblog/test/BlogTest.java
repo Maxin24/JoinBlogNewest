@@ -43,4 +43,15 @@ public class BlogTest {
 //    public void testDeleteById(){
 //        System.out.println(blogService.deleteById(122));
 //    }
+
+    @Test
+    public void testFuzzyQuery(){
+        System.out.println(blogService.fuzzyQueryByBLoggerNameOrTitle("java"));
+    }
+
+    @Test
+    public void testUpdateUrl(){
+        System.out.println(blogService.updateHtmlUrlById("1",115));
+        System.out.println(blogService.updateMdUrlById("1",115));
+    }
 }

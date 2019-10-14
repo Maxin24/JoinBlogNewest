@@ -18,30 +18,30 @@ public class CommentController {
     CommentService commentService;
 
     @RequestMapping(value = "/addWithBlog")
-    public void addCommentWithBlog(int userid, int blogid, String comments, String username,String bereplyeduser)  throws Exception{
+    public boolean addCommentWithBlog(int userid, int blogid, String comments, String username,String bereplyeduser)  throws Exception{
         Comment comment1 = new Comment();
         comment1.setUserid(userid);
         comment1.setBlogid(blogid);
         comment1.setComments(comments);
         comment1.setUsername(username);
         comment1.setBereplyeduser(bereplyeduser);
-        commentService.addCommentWithBlog(comment1);
+        return commentService.addCommentWithBlog(comment1);
     }
 
     @RequestMapping(value = "/addWithComment")
-    public void addCommentWithComment(int userid, String comments, String username,int commentid,String bereplyeduser)  throws Exception{
+    public boolean addCommentWithComment(int userid, String comments, String username,int commentid,String bereplyeduser)  throws Exception{
         Comment comment1 = new Comment();
         comment1.setUserid(userid);
         comment1.setCommentid(commentid);
         comment1.setComments(comments);
         comment1.setUsername(username);
         comment1.setBereplyeduser(bereplyeduser);
-        commentService.addCommentWithComment(comment1);
+        return commentService.addCommentWithComment(comment1);
     }
 
     @RequestMapping(value = "/delete")
-    public void deleteComment(int id)  throws Exception{
-        commentService.deleteComment(id);
+    public boolean deleteComment(int id)  throws Exception{
+        return commentService.deleteComment(id);
     }
 
     @RequestMapping(value = "/query")
@@ -57,8 +57,8 @@ public class CommentController {
     }
 
     @RequestMapping(value = "/praise")
-    public void praiseComment( int id, int praise) throws Exception{
-        commentService.praiseComment(id,praise);
+    public boolean praiseComment( Integer id, int praise) throws Exception{
+        return commentService.praiseComment(id,praise);
     }
 
     @RequestMapping(value = "/queryByBlogid")
