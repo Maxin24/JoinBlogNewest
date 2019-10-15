@@ -41,7 +41,7 @@
     </select>
 
     <!--  更新点赞数  -->
-    <update id="updatePraise">
+    <update id="praiseComment">
       update t_comment set praise = #{praise} where id = #{id}
     </update>
 
