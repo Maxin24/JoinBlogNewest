@@ -46,10 +46,10 @@ public class BookmarksServiceTest {
         System.out.println(bookmarksService.delBookmarksByName(bookmarks.getBookmarksName()));
     }
 
-    @Test
-    public void testListBookmarks() throws Exception{
-        System.out.println(bookmarksService.listBookmarks());
-    }
+//    @Test
+//    public void testListBookmarks() throws Exception{
+//        System.out.println(bookmarksService.listBookmarks());
+//    }
 
     @Test
     public void testQueryBookmarks() throws Exception{

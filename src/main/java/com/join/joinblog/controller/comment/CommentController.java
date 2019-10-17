@@ -1,7 +1,9 @@
 package com.join.joinblog.controller.comment;
 
+import com.join.joinblog.controller.user.UserController;
 import com.join.joinblog.entity.comment.Comment;
 import com.join.joinblog.service.comment.CommentService;
+import com.join.joinblog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,8 @@ public class CommentController {
 
     @Autowired
     CommentService commentService;
+    UserService userService;
+    UserController userController;
 
     @RequestMapping(value = "/addWithBlog")
     public boolean addCommentWithBlog(int userid, int blogid, String comments, String username,String bereplyeduser)  throws Exception{
@@ -25,6 +29,10 @@ public class CommentController {
         comment1.setComments(comments);
         comment1.setUsername(username);
         comment1.setBereplyeduser(bereplyeduser);
+        String userurl = userController.queryHead(username).getHeadUrl();
+        comment1.setUserurl(userurl);
+        String bereplyeduserurl = userService.queryUserByUsername(bereplyeduser).getHeadUrl();
+        comment1.setBereplyeduserurl(bereplyeduserurl);
         return commentService.addCommentWithBlog(comment1);
     }
 
@@ -36,6 +44,10 @@ public class CommentController {
         comment1.setComments(comments);
         comment1.setUsername(username);
         comment1.setBereplyeduser(bereplyeduser);
+        String userurl = userService.queryUserByUsername(username).getHeadUrl();
+        comment1.setUserurl(userurl);
+        String bereplyeduserurl = userService.queryUserByUsername(bereplyeduser).getHeadUrl();
+        comment1.setBereplyeduserurl(bereplyeduserurl);
         return commentService.addCommentWithComment(comment1);
     }
 

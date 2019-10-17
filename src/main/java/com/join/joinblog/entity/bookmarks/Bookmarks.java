@@ -14,6 +14,12 @@ public class Bookmarks {
 
     private String blogId;
 
+    private String description;
+
+    private String userId;
+
+    private String blogName;
+
     public Integer getId() {
         return id;
     }
@@ -38,12 +44,39 @@ public class Bookmarks {
         this.blogId = blogId;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getBlogName() {
+        return blogName;
+    }
+
+    public void setBlogName(String blogName) {
+        this.blogName = blogName;
+    }
+
     @Override
     public String toString() {
         return "Bookmarks{" +
                 "id=" + id +
                 ", bookmarksName='" + bookmarksName + '\'' +
-                ", blogId=" + blogId +
+                ", blogId='" + blogId + '\'' +
+                ", description='" + description + '\'' +
+                ", userId='" + userId + '\'' +
+                ", blogName='" + blogName + '\'' +
                 '}';
     }
 }

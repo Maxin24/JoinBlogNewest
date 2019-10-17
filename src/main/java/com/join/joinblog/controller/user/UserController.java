@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
+import java.io.*;
 import java.util.List;
 import java.util.Map;
 
@@ -180,14 +180,50 @@ public class UserController {
         return userService.fuzzyQuery(name);
     }
     /**
-     * 模糊查询
+     * 查看头像
      * @param username
      * @return
      * @throws Exception
      */
     @RequestMapping(value="/queryHead")
     public User queryHead(String username) throws Exception{
-        return userService.queryUserByUsername(username);
+        String str=null;
+        User user=userService.queryUserByUsername(username);
+        int id=user.getId();
+        String words_to = "/opt/joinblog/upload/words/user";
+        String filename = words_to + "/"+id+".txt";
+        File file1 = new File(filename);
+        if(file1.exists()){
+            try {
+                str = readFileContent(filename);
+                user.setHeadUrl(str);
+            }catch (IOException e){
+                str = "失败";
+                user.setHeadUrl(str);
+                e.printStackTrace();
+            }
+        }
+        else {
+            str = "文件不存在";
+            user.setHeadUrl(str);
+        }
+        return user;
+    }
+    private static String readFileContent(String fileName) throws IOException {
+        File file = new File(fileName);
+        InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "GBK");
+        BufferedReader bf = new BufferedReader(isr);
+        String content = "";
+        StringBuilder sb = new StringBuilder();
+        while(content != null){
+            content = bf.readLine();
+            if(content == null){
+                break;
+            }
+            sb.append(content.trim());
+        }
+        bf.close();
+        return sb.toString();
     }
 
     /**

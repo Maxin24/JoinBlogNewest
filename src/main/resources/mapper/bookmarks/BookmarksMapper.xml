@@ -11,8 +11,8 @@
 
     <insert id="addBookmarks">
       INSERT INTO t_bookmarks
-      (bookmarksName)
-      values (#{bookmarks.bookmarksName})
+      (bookmarksName,description,userId)
+      values (#{bookmarks.bookmarksName},#{bookmarks.description},#{bookmarks.userId})
     </insert>
 
     <delete id="delBookmarks">
@@ -23,7 +23,7 @@
       DELETE FROM t_bookmarks where bookmarksName = #{bookmarksName}
     </delete>
 
-    <select id="listBookmarks" resultType="bookmarks">
+    <select id="listAll" resultType="bookmarks">
       SELECT * FROM t_bookmarks
     </select>
 
@@ -43,6 +43,30 @@
       update t_bookmarks set blogId = #{blogId} where bookmarksName = #{bookmarksName}
     </insert>
 
+    <select id="listByName" resultType="bookmarks">
+      SELECT DISTINCT bookmarksName FROM t_bookmarks WHERE userId=#{userId}
+    </select>
+
+    <insert id="addBlog">
+     INSERT INTO t_bookmarks
+     (blogId,bookmarksName,blogName,userId) values (#{blogId},#{bookmarksName},#{blogName},#{userId})
+    </insert>
+
+    <delete id="delAllBlog">
+        DELETE from t_bookmarks where bookmarksName = #{bookmarksName} AND blogId is not null
+    </delete>
+
+    <select id="listBlogName" resultType="com.join.joinblog.entity.blog.Blog">
+        SELECT title FROM t_artical WHERE id=any (SELECT blogId FROM t_bookmarks WHERE bookmarksName=#{bookmarksName})
+   </select>
+
+    <select id="isDo" resultType="com.join.joinblog.entity.bookmarks.Bookmarks">
+      SELECT * from t_bookmarks where blogId=#{blogId} and userId=#{userId}
+    </select>
+
+    <delete id="cancel">
+        DELETE from t_bookmarks where blogId=#{blogId} AND userId=#{userId}
+    </delete>
 
 
 </mapper>

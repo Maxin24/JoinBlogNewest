@@ -42,6 +42,16 @@ public class Comment {
      */
     private String bereplyeduser;
 
+    /**
+     * 评论者的头像
+     */
+    private String userurl;
+
+    /**
+     * 被评论者的头像
+     */
+    private String bereplyeduserurl;
+
     public int getId() {
         return id;
     }
@@ -114,6 +124,22 @@ public class Comment {
         this.bereplyeduser = bereplyeduser;
     }
 
+    public String getUserurl() {
+        return userurl;
+    }
+
+    public void setUserurl(String userurl) {
+        this.userurl = userurl;
+    }
+
+    public String getBereplyeduserurl() {
+        return bereplyeduserurl;
+    }
+
+    public void setBereplyeduserurl(String bereplyeduserurl) {
+        this.bereplyeduserurl = bereplyeduserurl;
+    }
+
     public Comment() {
     }
 
@@ -124,12 +150,14 @@ public class Comment {
      * @param comments
      * @param username
      */
-    public Comment(int id, int userid, int blogid, String comments, String username) {
+    public Comment(int id, int userid, int blogid, String comments, String username,String userurl,String bereplyeduserurl) {
         this.id = id;
         this.userid = userid;
         this.blogid = blogid;
         this.comments = comments;
         this.username = username;
+        this.userurl = userurl;
+        this.bereplyeduserurl = bereplyeduserurl;
     }
 
     /**
@@ -140,12 +168,14 @@ public class Comment {
      * @param commentid
      */
 
-    public Comment(int id, int userid, String comments, String username, int commentid) {
+    public Comment(int id, int userid, String comments, String username, int commentid,String userurl,String bereplyeduserurl) {
         this.id = id;
         this.userid = userid;
         this.comments = comments;
         this.username = username;
         this.commentid = commentid;
+        this.userurl = userurl;
+        this.bereplyeduserurl = bereplyeduserurl;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.join.joinblog.test;
 
 import com.join.joinblog.BookmarksApplication;
+import com.join.joinblog.controller.user.UserController;
 import com.join.joinblog.service.user.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,9 +14,12 @@ public class UserTest {
     @Autowired
     UserService userService;
 
+    @Autowired
+    UserController userController;
+
     @Test
     public void test()throws Exception{
-        System.out.println(userService.queryUser(17));
+        System.out.println(userController.queryHead("123"));
     }
 
 

@@ -12,15 +12,15 @@
     <!--  评论博客  -->
     <insert id="addCommentWithBlog">
         INSERT INTO t_comment
-        (userid,blogid,comments,username,bereplyeduser)
-        VALUES (#{comment.userid},#{comment.blogid}, #{comment.comments},#{comment.username},#{comment.bereplyeduser})
+        (userid,blogid,comments,username,bereplyeduser,userurl,bereplyeduserurl)
+        VALUES (#{comment.userid},#{comment.blogid}, #{comment.comments},#{comment.username},#{comment.bereplyeduser},#{comment.userurl},#{comment.bereplyeduserurl})
     </insert>
 
     <!--  回复评论  -->
     <insert id="addCommentWithComment">
         INSERT INTO t_comment
-        (userid,comments,username,commentid,bereplyeduser)
-        VALUES ( #{comment.userid},#{comment.comments},#{comment.username},#{comment.commentid},#{comment.bereplyeduser})
+        (userid,comments,username,commentid,bereplyeduser,userurl,bereplyeduserurl)
+        VALUES ( #{comment.userid},#{comment.comments},#{comment.username},#{comment.commentid},#{comment.bereplyeduser},#{comment.userurl},#{comment.bereplyeduserurl})
     </insert>
 
 

@@ -26,4 +26,16 @@ public interface BookmarksService {
     public boolean addBlogId(String bookmarksName,String blogId)throws Exception;
 
     public Bookmarks queryBlogId(String bookmarksName)throws Exception;
+
+    public List<Bookmarks> listByName(String userId) throws Exception;
+
+    public boolean addBlog(String blogId,String bookmarksName,String blogName,String userId) throws Exception;
+
+    public boolean delAllBlog(String bookmarksName) throws Exception;
+
+    public List<Bookmarks> listBlogName(String bookmarksName) throws Exception;
+
+    public List<Bookmarks> isDo(String blogId,String userId)throws Exception;
+
+    public boolean cancel(String blogId,String userId)throws Exception;
 }

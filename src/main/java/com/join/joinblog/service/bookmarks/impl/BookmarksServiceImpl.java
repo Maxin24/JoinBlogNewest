@@ -39,6 +39,7 @@ public class BookmarksServiceImpl implements BookmarksService {
     public List<Bookmarks> listBookmarks() throws Exception{
         List<Bookmarks> list = Collections.emptyList();
         list = bookmarksMapper.listBookmarks();
+        System.out.println(list);
         return list;
     }
 
@@ -62,5 +63,35 @@ public class BookmarksServiceImpl implements BookmarksService {
     @Override
     public Bookmarks queryBlogId(String bookmarksName)throws Exception{
         return bookmarksMapper.queryBlogId(bookmarksName);
+    }
+
+    @Override
+    public List<Bookmarks> listByName(String userId) throws Exception{
+        return bookmarksMapper.listByName(userId);
+    }
+
+    @Override
+    public boolean addBlog(String blogId,String bookmarksName,String blogName,String userId) throws Exception{
+        return bookmarksMapper.addBlog(blogId,bookmarksName,blogName,userId);
+    }
+
+    @Override
+    public boolean delAllBlog(String bookmarksName)throws Exception{
+        return bookmarksMapper.delAllBlog(bookmarksName);
+    }
+
+    @Override
+    public List<Bookmarks> listBlogName(String bookmarksName)throws Exception{
+        return bookmarksMapper.listBlogName(bookmarksName);
+    }
+
+    @Override
+    public List<Bookmarks> isDo(String blogId,String userId)throws Exception{
+        return bookmarksMapper.isDo(blogId,userId);
+    }
+
+    @Override
+    public boolean cancel(String blogId,String userId)throws Exception{
+        return bookmarksMapper.cancel(blogId,userId);
     }
 }
