@@ -6,7 +6,7 @@
         <id property="id" column="id"/>
         <result property="blogid" column="blogid"/>
         <result property="comments" column="comments"/>
-        <result property="tim" column="tim"/>
+        <result property="praise" column="praise"/>
         <result property="commentid" column="commentid"/>
     </resultMap>
     <!--  评论博客  -->

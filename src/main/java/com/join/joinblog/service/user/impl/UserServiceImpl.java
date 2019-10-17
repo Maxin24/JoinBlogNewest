@@ -252,6 +252,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public List<User> fuzzyQuery(String name) throws Exception{
+        System.out.println(name);
         return userMapper.fuzzyQuery(name);
     }
     /**
