@@ -57,17 +57,15 @@ public class UserController {
     }
 
     /**
-     * 注册
+     * 根据邀请码注册
      * @param username
      * @param password
      * @throws Exception
      */
     @RequestMapping(value = "/addUser")
     public String addUser(String username, String password,String inviteStr) throws Exception{
-        System.out.println(inviteStr);
        if(inviteCodeService.deleteCode(inviteStr)){
            boolean b=userService.judgeUsername(username);
-           System.out.println("addUser");
            if(b){
                User user = new User();
                user.setUsername(username);

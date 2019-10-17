@@ -52,7 +52,6 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public int updateUser(User user) throws Exception{
-        //boolean b=userMapper.updateUser(user);
         return userMapper.updateUser(user);
     }
     /**
@@ -63,7 +62,6 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public int deleteUser(User user) throws Exception{
-        System.out.println(user);
         return userMapper.deleteUser(user);
     }
     /**
@@ -86,10 +84,8 @@ public class UserServiceImpl implements UserService {
     public boolean judgeUsername(String name) throws Exception{
         boolean b=true;
         List<User> list=userMapper.listUser();
-        System.out.println(name);
         for(int i=0;i<list.size();i++){
             User user=list.get(i);
-            System.out.println(user);
             if(user.getUsername().equals(name)){
                 b=false;
                 return b;
@@ -105,7 +101,6 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public int uploadHead(int id,String path,String headUrl) throws Exception{
-
         return userMapper.uploadHead(id,path,headUrl);
 
     }
@@ -117,7 +112,6 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public int setBlogCount() throws Exception{
-
         int n=userMapper.setBlogCount().size();
         return n;
 
@@ -158,10 +152,8 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public List<User> listFans(int id) throws Exception{
-        System.out.println("qweqwe");
         List<User> list=new ArrayList<>();
         String a=userMapper.queryFans(id);
-        System.out.println(a);
         String[] x=a.split(",");
         for(int i=0;i<x.length;i++){
             int e=Integer.parseInt(x[i]);
