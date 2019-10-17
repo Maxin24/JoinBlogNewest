@@ -24,8 +24,8 @@ public class InviteCodeServiceImpl implements InviteCodeService {
     }
 
     @Override
-    public boolean deleteCode(int id) {
-        if(inviteCodeMapper.deleteCode(id)!=0)
+    public boolean deleteCode(String code) {
+        if(inviteCodeMapper.deleteCode(code)!=0)
             return true;
         return false;
     }

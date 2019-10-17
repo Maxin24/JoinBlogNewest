@@ -7,5 +7,5 @@ public interface InviteCodeService {
 
     List getCodes();
 
-    boolean deleteCode(int id);
+    boolean deleteCode(String code);
 }

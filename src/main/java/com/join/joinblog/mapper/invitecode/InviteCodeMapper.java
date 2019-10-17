@@ -11,5 +11,5 @@ import java.util.List;
 public interface InviteCodeMapper {
     public int addCode(@Param("code") String code);
     public List getCodes();
-    public int deleteCode(@Param("id") int id);
+    public int deleteCode(@Param("code") String code);
 }

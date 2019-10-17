@@ -16,6 +16,6 @@
     </select>
 
     <delete id="deleteCode">
-        delete from t_invitecode where id=#{id};
+        delete from t_invitecode where code=#{code};
     </delete>
 </mapper>
