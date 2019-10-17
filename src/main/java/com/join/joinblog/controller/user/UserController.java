@@ -64,9 +64,8 @@ public class UserController {
      */
     @RequestMapping(value = "/addUser")
     public String addUser(String username, String password,String inviteStr) throws Exception{
-       if(inviteCodeService.deleteCode(inviteStr)){
-           boolean b=userService.judgeUsername(username);
-           if(b){
+       if(userService.judgeUsername(username)){
+           if(inviteCodeService.deleteCode(inviteStr)){
                User user = new User();
                user.setUsername(username);
                user.setPassword(password);
@@ -74,10 +73,10 @@ public class UserController {
                return "注册成功";
            }
            else {
-               return "用户名已被占用";
+               return "注册码错误";
            }
        }
-        else return "验证码错误";
+        else return "用户名已被占用";
     }
 
     /**
