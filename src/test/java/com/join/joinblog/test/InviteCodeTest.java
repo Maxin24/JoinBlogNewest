@@ -28,6 +28,6 @@ public class InviteCodeTest {
 
     @Test
     public void testDeleteCode(){
-        System.out.println(inviteCodeService.deleteCode(1));
+        System.out.println(inviteCodeService.deleteCode("1"));
     }
 }

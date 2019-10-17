@@ -63,6 +63,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public int deleteUser(User user) throws Exception{
+        System.out.println(user);
         return userMapper.deleteUser(user);
     }
     /**
@@ -85,8 +86,10 @@ public class UserServiceImpl implements UserService {
     public boolean judgeUsername(String name) throws Exception{
         boolean b=true;
         List<User> list=userMapper.listUser();
+        System.out.println(name);
         for(int i=0;i<list.size();i++){
-            User user=(User)list.get(i);
+            User user=list.get(i);
+            System.out.println(user);
             if(user.getUsername().equals(name)){
                 b=false;
                 return b;
@@ -261,7 +264,7 @@ public class UserServiceImpl implements UserService {
     }
     /**
      * 模糊查询
-     * @param name
+     * @param
      * @return
      * @throws Exception
      */

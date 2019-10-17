@@ -1,6 +1,8 @@
 package com.join.joinblog.controller.user;
 
 import com.join.joinblog.entity.user.User;
+import com.join.joinblog.service.blog.impl.BlogServiceImpl;
+import com.join.joinblog.service.invitecode.impl.InviteCodeServiceImpl;
 import com.join.joinblog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,8 @@ public class UserController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    private InviteCodeServiceImpl inviteCodeService;
 
     /**
      * 登录
@@ -59,19 +63,23 @@ public class UserController {
      * @throws Exception
      */
     @RequestMapping(value = "/addUser")
-    public String addUser(String username, String password) throws Exception{
-        boolean b=userService.judgeUsername(username);
-        System.out.println("addUser");
-        if(b){
-            User user = new User();
-            user.setUsername(username);
-            user.setPassword(password);
-            userService.addUser(user);
-            return "注册成功";
-        }
-        else {
-            return "用户名已被占用";
-        }
+    public String addUser(String username, String password,String inviteStr) throws Exception{
+        System.out.println(inviteStr);
+       if(inviteCodeService.deleteCode(inviteStr)){
+           boolean b=userService.judgeUsername(username);
+           System.out.println("addUser");
+           if(b){
+               User user = new User();
+               user.setUsername(username);
+               user.setPassword(password);
+               userService.addUser(user);
+               return "注册成功";
+           }
+           else {
+               return "用户名已被占用";
+           }
+       }
+        else return "验证码错误";
     }
 
     /**
@@ -90,8 +98,7 @@ public class UserController {
      * @throws Exception
      */
     @RequestMapping(value = "/delete")
-    public int deleteUser(@PathVariable User user) throws Exception{
-        System.out.println("delete");
+    public int deleteUser(User user) throws Exception{
         return userService.deleteUser(user);
     }
     /**
@@ -165,7 +172,6 @@ public class UserController {
     public List<User> listMyFocus(int id) throws Exception{
         return userService.listFocus(id);
     }
-
     /**
      * 模糊查询
      * @param name

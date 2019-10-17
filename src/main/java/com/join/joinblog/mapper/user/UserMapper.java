@@ -49,7 +49,7 @@ public interface UserMapper {
      * @return
      * @throws Exception
      */
-    public int deleteUser(@Param("user") User user)throws Exception;
+    public int deleteUser(@Param("user")User user)throws Exception;
 
     /**
      * 列出所有user

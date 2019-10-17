@@ -31,7 +31,7 @@ public class InviteCodeController {
     }
 
     @RequestMapping("/delete")
-    public boolean delete(@RequestBody int id){
-        return inviteCodeService.deleteCode(id);
+    public boolean delete(@RequestBody String str){
+        return inviteCodeService.deleteCode(str);
     }
 }
