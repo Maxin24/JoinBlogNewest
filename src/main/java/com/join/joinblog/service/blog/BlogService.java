@@ -14,7 +14,7 @@ public interface BlogService {
 
     List fuzzyQueryByBLoggerNameOrTitle(String input);
     List fuzzyQueryByTitle(String title);
-    Blog queryById(int id);
+    List queryById(int id);
     List queryByBloggerId(int bloggerId);
     List queryByTag(String tag);
     List queryAll();

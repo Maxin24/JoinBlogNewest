@@ -19,7 +19,7 @@ public interface BlogMapper {
 
     List fuzzyQueryByBLoggerNameOrTitle(@Param("input") String input);
     List fuzzyQueryByTitle(@Param("title") String title);
-    Blog queryById(@Param("id") int id);
+    List queryById(@Param("id") int id);
     List queryByBloggerId(@Param("bloggerId") int bloggerId);
     List queryByTag(@Param("tag") String tag);
     List queryAll();

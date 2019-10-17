@@ -54,4 +54,16 @@ public class BlogTest {
         System.out.println(blogService.updateHtmlUrlById("1",115));
         System.out.println(blogService.updateMdUrlById("1",115));
     }
+
+
+    @Test
+    public void add(){
+        for(int i=0;i<3;i++)
+            blogService.addBLog(2,"杨岚清啥也传不过来","ylq");
+    }
+
+    @Test
+    public void testAddPv(){
+        blogService.updatePvById(120);
+    }
 }

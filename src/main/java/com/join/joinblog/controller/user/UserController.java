@@ -19,6 +19,7 @@ import java.util.Map;
 @CrossOrigin
 @RequestMapping("/user")
 public class UserController {
+
     @Autowired
     UserService userService;
 
@@ -30,7 +31,7 @@ public class UserController {
      * @throws Exception
      */
     @RequestMapping(value="/login")
-    public User login(String username, String password, Map<String, Object> map) throws Exception{
+    public User login(String username, String password) throws Exception{
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
@@ -60,6 +61,7 @@ public class UserController {
     @RequestMapping(value = "/addUser")
     public String addUser(String username, String password) throws Exception{
         boolean b=userService.judgeUsername(username);
+        System.out.println("addUser");
         if(b){
             User user = new User();
             user.setUsername(username);
@@ -78,8 +80,8 @@ public class UserController {
      * @throws Exception
      */
     @RequestMapping(value = "/update")
-    public void updateUser(User user) throws Exception{
-        userService.updateUser(user);
+    public int updateUser(User user) throws Exception{
+        return userService.updateUser(user);
     }
 
     /**
@@ -88,8 +90,9 @@ public class UserController {
      * @throws Exception
      */
     @RequestMapping(value = "/delete")
-    public void deleteUser(User user) throws Exception{
-        userService.deleteUser(user);
+    public int deleteUser(@PathVariable User user) throws Exception{
+        System.out.println("delete");
+        return userService.deleteUser(user);
     }
     /**
      * 上传头像
@@ -126,7 +129,7 @@ public class UserController {
             file.transferTo(dest); //保存文件
             //System.out.print("保存文件路径"+user.getPath()+"\n");
             user.setHeadUrl("http://localhost:8082/images/"+fileName);
-            userService.uploadHead(user);
+            userService.uploadHead(1,"","");
 
         } catch (Exception e) {
             return "头像上传失败";
@@ -142,9 +145,112 @@ public class UserController {
      */
     @RequestMapping(value = "/listUser")
     public List<User> listUser() throws Exception{
-
         return userService.listUser();
     }
+    /**
+     * 通过id获取所有fans
+     * @param
+     * @throws Exception
+     */
+    @RequestMapping(value = "/listFans")
+    public List<User> listMyFans(int id) throws Exception{
+        return userService.listFans(id);
+    }
+    /**
+     * 通过id获取所有focus
+     * @param
+     * @throws Exception
+     */
+    @RequestMapping(value = "/listFocus")
+    public List<User> listMyFocus(int id) throws Exception{
+        return userService.listFocus(id);
+    }
 
+    /**
+     * 模糊查询
+     * @param name
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value="/fuzzyQuery")
+    public List<User> fuzzyQuery(String name) throws Exception{
+        return userService.fuzzyQuery(name);
+    }
+    /**
+     * 模糊查询
+     * @param username
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value="/queryHead")
+    public User queryHead(String username) throws Exception{
+        return userService.queryUserByUsername(username);
+    }
+
+    /**
+     * 增加粉丝
+     * @param id
+     * @param id2
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value="/addFans")
+    public int addFans(int id,int id2) throws Exception{
+        List l=userService.listFans(id);
+        String str;
+        if (l.size()==0){
+            str=String.valueOf(id2);
+            return userService.addFans(id,str);
+        }
+        else{
+            str=","+id2;
+            return userService.addFans(id,str);
+        }
+    }
+    /**
+     * 增加粉丝
+     * @param id
+     * @param id2
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value="/deleteFans")
+    public int deleteFans(int id,int id2) throws Exception{
+        String str=String.valueOf(id2);
+        return userService.deleteFans(id,str+",");
+    }
+    /**
+     * 增加粉丝
+     * @param id
+     * @param id2
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value="/deleteFocus")
+    public int deleteFocus(int id,int id2) throws Exception{
+        String str=String.valueOf(id2);
+        return userService.deleteFocus(id,str+",");
+    }
+
+    /**
+     * 增加关注
+     * @param id
+     * @param id2
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value="/addFocus")
+    public int addFocus(int id,int id2) throws Exception{
+        List l=userService.listFocus(id);
+        String str;
+        if (l==null){
+            str=String.valueOf(id2);
+            return userService.addFocus(id,str);
+        }
+        else{
+            str=","+id2;
+            return userService.addFocus(id,str);
+        }
+    }
 
 }

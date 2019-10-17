@@ -40,7 +40,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Blog queryById(int id) {
+    public List queryById(int id) {
         return blogMapper.queryById(id);
     }
 
@@ -56,7 +56,8 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public int updatePvById(int id) {
-        Blog blog=blogMapper.queryById(id);
+        List list=blogMapper.queryById(id);
+        Blog blog=(Blog)list.get(0);
         return blogMapper.updatePvById(blog.getPv()+1,id);
     }
 

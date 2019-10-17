@@ -2,7 +2,10 @@ package com.join.joinblog.controller.blog;
 
 import com.join.joinblog.controller.util.UtilController;
 import com.join.joinblog.entity.blog.Blog;
+
+import com.join.joinblog.entity.user.User;
 import com.join.joinblog.service.blog.impl.BlogServiceImpl;
+import com.join.joinblog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +21,10 @@ import java.util.List;
 @RequestMapping("/blog")
 public class BlogController {
     @Autowired
-    private BlogServiceImpl blogService;
+    BlogServiceImpl blogService;
+
+    @Autowired
+    UserService userService;
 
     @Autowired
     private UtilController utilController;
@@ -37,9 +43,13 @@ public class BlogController {
      * @return
      */
     @RequestMapping("/queryById/{id}")
-    public Blog queryById(@PathVariable int id){
-        return blogService.queryById(id);
+    public List queryById(@PathVariable int id)throws Exception{
+        List list=blogService.queryById(id);
+        User user=userService.queryUser(id);
+        list.add(new User());
+        return list;
     }
+
 
     /**
      * 通过博主id查博客
@@ -63,7 +73,7 @@ public class BlogController {
 
     @RequestMapping("/addTagById/{id}/{tag}")
     public void addTagById(@PathVariable int id, @PathVariable String tag){
-        Blog blog=blogService.queryById(id);
+        Blog blog=(Blog)blogService.queryById(id).get(0);
         String tags;
         if(blog.getTags().equals("")){
             tags=","+tag;
@@ -81,7 +91,7 @@ public class BlogController {
 
     @RequestMapping("deleteTagById/{id}/{tag}")
     public void deleteTag(@PathVariable String tag, @PathVariable int id){
-        Blog blog=blogService.queryById(id);
+        Blog blog=(Blog)blogService.queryById(id).get(0);
         String tags=blog.getTags();
         String[] tagList=tags.split(",");
         System.out.println(tagList);
@@ -113,6 +123,7 @@ public class BlogController {
      */
     @RequestMapping("/delete")
     public int deleteById(@RequestBody int da){
+        System.out.println(da);
         if(blogService.deleteById(da))
             return 1;
         return 0;

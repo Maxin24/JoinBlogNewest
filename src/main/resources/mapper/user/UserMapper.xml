@@ -28,7 +28,7 @@
 
     <update id="updateUser">
         UPDATE t_blog
-        SET username=#{user.username},password=#{user.password},sex=#{user.sex}
+        SET nickname=#{user.nickname},password=#{user.password},sex=#{user.sex}
         WHERE id=#{user.id}
     </update>
 
@@ -39,8 +39,47 @@
 
     <update id="uploadHead">
         UPDATE t_blog
-        SET headUrl=#{user.headUrl},path=#{user.path}
-        WHERE id=#{user.id}
+        SET headUrl=#{headUrl},path=#{path}
+        WHERE id=#{id}
     </update>
+
+    <update id="addFans">
+        UPDATE t_blog
+        SET fans=#{str}
+        WHERE id=#{id}
+    </update>
+
+    <update id="addFocus">
+        UPDATE t_blog
+        SET focus=#{str}
+        WHERE id=#{id}
+    </update>
+
+    <select id="queryUser" resultType="user">
+        SELECT *
+        FROM t_blog
+        WHERE id=#{id}
+    </select>
+
+    <select id="queryUserByUsername" resultType="user">
+        SELECT *
+        FROM t_blog
+        WHERE username=#{username}
+    </select>
+
+    <select id="queryFans" resultType="string">
+        SELECT fans
+        FROM t_blog
+        WHERE id=#{id}
+    </select>
+    <select id="queryFocus" resultType="string">
+        SELECT focus
+        FROM t_blog
+        WHERE id=#{id}
+    </select>
+
+    <select id="fuzzyQuery" resultType="user">
+        select * from t_blog where username like concat('%',#{username},'%')
+    </select>
 
 </mapper>

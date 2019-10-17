@@ -1,11 +1,13 @@
 package com.join.joinblog.service.user.impl;
 
+import com.join.joinblog.entity.blog.Blog;
 import com.join.joinblog.entity.user.User;
 import com.join.joinblog.mapper.user.UserMapper;
 import com.join.joinblog.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,9 +51,9 @@ public class UserServiceImpl implements UserService {
      * @throws Exception
      */
     @Override
-    public boolean updateUser(User user) throws Exception{
-        boolean b=userMapper.updateUser(user);
-        return b;
+    public int updateUser(User user) throws Exception{
+        //boolean b=userMapper.updateUser(user);
+        return userMapper.updateUser(user);
     }
     /**
      * 删除
@@ -60,9 +62,8 @@ public class UserServiceImpl implements UserService {
      * @throws Exception
      */
     @Override
-    public boolean deleteUser(User user) throws Exception{
-        boolean b=userMapper.deleteUser(user);
-        return b;
+    public int deleteUser(User user) throws Exception{
+        return userMapper.deleteUser(user);
     }
     /**
      * 删除
@@ -100,10 +101,173 @@ public class UserServiceImpl implements UserService {
      * @throws Exception
      */
     @Override
-    public void uploadHead(User user) throws Exception{
+    public int uploadHead(int id,String path,String headUrl) throws Exception{
 
-        userMapper.uploadHead(user);
+        return userMapper.uploadHead(id,path,headUrl);
 
+    }
+    /**
+     * 获取博客数
+     * @param
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int setBlogCount() throws Exception{
+
+        int n=userMapper.setBlogCount().size();
+        return n;
+
+    }
+    /**
+     * 获取粉丝数
+     * @param
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int setFansCount() throws Exception{
+
+        int n=0;
+        //n=userMapper.setFansCount().size();
+        return n;
+
+    }
+    /**
+     * 获取关注数
+     * @param
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int setFocusCount() throws Exception{
+
+        int n=0;
+        //n=userMapper.setFocusCount().size();
+        return n;
+
+    }
+    /**
+     * 列出粉丝
+     * @param
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<User> listFans(int id) throws Exception{
+        System.out.println("qweqwe");
+        List<User> list=new ArrayList<>();
+        String a=userMapper.queryFans(id);
+        System.out.println(a);
+        String[] x=a.split(",");
+        for(int i=0;i<x.length;i++){
+            int e=Integer.parseInt(x[i]);
+            User user=userMapper.queryUser(e);
+            list.add(user);
+        }
+        return list;
+    }
+    /**
+     * 增加粉丝
+     * @param
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int addFans(int id,String str) throws Exception{
+        String a=userMapper.queryFans(id);
+        a=a+str;
+        return userMapper.addFans(id,a);
+    }
+    /**
+     * 增加粉丝
+     * @param
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int deleteFans(int id,String str) throws Exception{
+        String a=userMapper.queryFocus(id);
+        a=a.replaceAll(str,"");
+        return userMapper.addFans(id,a);
+    }
+    /**
+     * 增加关注
+     * @param
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int addFocus(int id,String str) throws Exception{
+        String a=userMapper.queryFocus(id);
+        a=a+str;
+        return userMapper.addFocus(id,a);
+    }
+    /**
+     * 增加关注
+     * @param
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public int deleteFocus(int id,String str) throws Exception{
+        String a=userMapper.queryFocus(id);
+        a=a.replaceAll(str,"");
+        return userMapper.addFocus(id,a);
+    }
+    /**
+     * 列出关注
+     * @param
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<User> listFocus(int id) throws Exception{
+        List<User> list=new ArrayList<>();
+        String a=userMapper.queryFocus(id);
+        if(a==null){
+            return null;
+        }
+        else{
+            String[] x=a.split(",");
+            for(int i=0;i<x.length;i++){
+                int e=Integer.parseInt(x[i]);
+                User user=userMapper.queryUser(e);
+                list.add(user);
+            }
+            return list;
+        }
+    }
+    /**
+     * 模糊查询
+     * @param name
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public User queryUserByUsername(String name) throws Exception{
+        return userMapper.queryUserByUsername(name);
+    }
+
+    /**
+     * 模糊查询
+     * @param name
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<User> fuzzyQuery(String name) throws Exception{
+        return userMapper.fuzzyQuery(name);
+    }
+    /**
+     * 模糊查询
+     * @param name
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public User queryUser(int id) throws Exception{
+        return userMapper.queryUser(id);
     }
 
 }

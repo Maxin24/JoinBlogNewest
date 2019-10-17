@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class InviteCodeServiceImpl implements InviteCodeService {
     @Autowired
-    private InviteCodeMapper inviteCodeMapper;
+    InviteCodeMapper inviteCodeMapper;
     @Override
     public boolean addCode(String code) {
         if(inviteCodeMapper.addCode(code)!=0)
