@@ -78,11 +78,11 @@ public class CommentController {
     @RequestMapping(value = "/queryByCommentid")
     public List<Comment> queryByCommentid(int commentid) throws Exception{
         List<Comment> list = commentService.queryByCommentid(commentid);
-        for(int i=0;i<list.size();i++)
-        {
-            list.get(i).setUserurl(userController.queryHead(list.get(i).getUsername()).getHeadUrl());
-            list.get(i).setBereplyeduserurl(userController.queryHead(list.get(i).getBereplyeduser()).getHeadUrl());
-        }
+//        for(int i=0;i<list.size();i++)
+//        {
+//            list.get(i).setUserurl(userController.queryHead(list.get(i).getUsername()).getHeadUrl());
+//            list.get(i).setBereplyeduserurl(userController.queryHead(list.get(i).getBereplyeduser()).getHeadUrl());
+//        }
         return list;
     }
 }

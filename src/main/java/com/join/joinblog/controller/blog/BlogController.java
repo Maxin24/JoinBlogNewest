@@ -46,8 +46,8 @@ public class BlogController {
      * @param id
      * @return
      */
-    @RequestMapping("/queryById")
-    public List queryById(@RequestBody int id)throws Exception{
+    @RequestMapping("/queryById/{id}")
+    public List queryById(@PathVariable int id)throws Exception{
         List list=blogService.queryById(id);
         Blog blog=(Blog)list.get(0);
         User user=userController.queryHead(blog.getBloggerName());
