@@ -23,6 +23,7 @@ public interface BlogService {
     List getSomeOrderByPv(int num);
     List getAllOrderByDate();
     List getSomeOrderByDate(int num);
+    List fuzzyQueryMyBlog(int bloggerId,String input,int order);
 
     boolean updateTitleById(String title, int id);
     boolean updateHtmlUrlById(String htmlUrl,int id);

@@ -96,4 +96,17 @@
     <select id="fuzzyQueryByBLoggerNameOrTitle" resultType="com.join.joinblog.entity.blog.Blog">
         select * from t_artical where title like "%"#{input}"%" or bloggerName like "%"#{input}"%" order by pv desc ,releaseDate desc,releaseTime desc;
     </select>
+
+    <select id="fuzzyQueryMyBlog" resultType="com.join.joinblog.entity.blog.Blog">
+        select * from t_artical where bloggerId=#{bloggerId}
+        <if test="input != null">
+            and title like "%"#{input}"%"
+        </if>
+        <if test="order == 0">
+            order by pv desc ,releaseDate desc,releaseTime desc;
+        </if>
+        <if test="order == 1">
+            order by releaseDate desc ,releaseTime desc,pv desc;
+        </if>
+    </select>
 </mapper>
