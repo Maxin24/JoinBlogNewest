@@ -18,7 +18,7 @@ public class CommentController {
 
     @Autowired
     CommentService commentService;
-    UserService userService;
+    @Autowired
     UserController userController;
 
     @RequestMapping(value = "/addWithBlog")
@@ -29,10 +29,6 @@ public class CommentController {
         comment1.setComments(comments);
         comment1.setUsername(username);
         comment1.setBereplyeduser(bereplyeduser);
-        String userurl = userController.queryHead(username).getHeadUrl();
-        comment1.setUserurl(userurl);
-        String bereplyeduserurl = userService.queryUserByUsername(bereplyeduser).getHeadUrl();
-        comment1.setBereplyeduserurl(bereplyeduserurl);
         return commentService.addCommentWithBlog(comment1);
     }
 
@@ -44,10 +40,6 @@ public class CommentController {
         comment1.setComments(comments);
         comment1.setUsername(username);
         comment1.setBereplyeduser(bereplyeduser);
-        String userurl = userService.queryUserByUsername(username).getHeadUrl();
-        comment1.setUserurl(userurl);
-        String bereplyeduserurl = userService.queryUserByUsername(bereplyeduser).getHeadUrl();
-        comment1.setBereplyeduserurl(bereplyeduserurl);
         return commentService.addCommentWithComment(comment1);
     }
 
@@ -65,6 +57,10 @@ public class CommentController {
     @RequestMapping(value = "/list")
     public List<Comment> listComment() throws Exception{
         List<Comment> list = commentService.listComment();
+        for(int i=0;i<list.size();i++)
+        {
+            userController.queryHead(list.get(i).getUsername()).getHeadUrl();
+        }
         return list;
     }
 
@@ -76,12 +72,20 @@ public class CommentController {
     @RequestMapping(value = "/queryByBlogid")
     public List<Comment> queryByBlogid(int blogid) throws Exception{
         List<Comment> list = commentService.queryByBlogid(blogid);
+        for(int i=0;i<list.size();i++)
+        {
+            userController.queryHead(list.get(i).getUsername()).getHeadUrl();
+        }
         return list;
     }
 
     @RequestMapping(value = "/queryByCommentid")
     public List<Comment> queryByCommentid(int commentid) throws Exception{
         List<Comment> list = commentService.queryByCommentid(commentid);
+        for(int i=0;i<list.size();i++)
+        {
+            userController.queryHead(list.get(i).getUsername()).getHeadUrl();
+        }
         return list;
     }
 }

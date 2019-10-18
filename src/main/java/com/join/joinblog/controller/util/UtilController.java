@@ -183,7 +183,7 @@ public class UtilController {
 
         String endstr = null;
         //这里还需要修改文件名称！
-        String target = adress  +"/"+id+title+".txt";
+        String target = adress  +"/"+id+title+"md.txt";
         File file = new File(target);
         if(file.exists()){
             try {
@@ -238,8 +238,7 @@ public class UtilController {
         }
         return info;
     }
-    @Autowired
-    UserService userService;
+
     @ResponseBody
     @RequestMapping(value = "/pictreamupload")
     public String pictreamupload(@RequestParam(value = "content", required=false)String str,@RequestParam(value = "userid", required=false)int id){

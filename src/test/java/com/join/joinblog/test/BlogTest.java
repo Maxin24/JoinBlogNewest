@@ -56,11 +56,6 @@ public class BlogTest {
     }
 
 
-    @Test
-    public void add(){
-        for(int i=0;i<3;i++)
-            blogService.addBLog(2,"杨岚清啥也传不过来","ylq");
-    }
 
     @Test
     public void testAddPv(){

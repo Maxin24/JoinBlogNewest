@@ -3,6 +3,7 @@ package com.join.joinblog.controller.bookmarks;
 import com.join.joinblog.entity.bookmarks.Bookmarks;
 import com.join.joinblog.service.bookmarks.BookmarksService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,6 +14,7 @@ import java.util.List;
  * @Description:
  * @Date: 11:05 2019/9/6
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/bookmarks")
 public class BookmarksController {
