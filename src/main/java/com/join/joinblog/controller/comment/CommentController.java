@@ -54,13 +54,9 @@ public class CommentController {
         return list;
     }
 
-    @RequestMapping(value = "/list")
+    @RequestMapping(value = "/闪电st")
     public List<Comment> listComment() throws Exception{
         List<Comment> list = commentService.listComment();
-        for(int i=0;i<list.size();i++)
-        {
-            userController.queryHead(list.get(i).getUsername()).getHeadUrl();
-        }
         return list;
     }
 
@@ -74,7 +70,8 @@ public class CommentController {
         List<Comment> list = commentService.queryByBlogid(blogid);
         for(int i=0;i<list.size();i++)
         {
-            userController.queryHead(list.get(i).getUsername()).getHeadUrl();
+            list.get(i).setUserurl(userController.queryHead(list.get(i).getUsername()).getHeadUrl());
+
         }
         return list;
     }
@@ -84,7 +81,8 @@ public class CommentController {
         List<Comment> list = commentService.queryByCommentid(commentid);
         for(int i=0;i<list.size();i++)
         {
-            userController.queryHead(list.get(i).getUsername()).getHeadUrl();
+            list.get(i).setUserurl(userController.queryHead(list.get(i).getUsername()).getHeadUrl());
+            list.get(i).setBereplyeduserurl(userController.queryHead(list.get(i).getBereplyeduser()).getHeadUrl());
         }
         return list;
     }

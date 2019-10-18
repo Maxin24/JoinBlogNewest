@@ -1,5 +1,6 @@
 package com.join.joinblog.controller.blog;
 
+import com.join.joinblog.controller.user.UserController;
 import com.join.joinblog.controller.util.UtilController;
 import com.join.joinblog.entity.blog.Blog;
 
@@ -27,6 +28,9 @@ public class BlogController {
     UserService userService;
 
     @Autowired
+    UserController userController;
+
+    @Autowired
     private UtilController utilController;
     /**
      * 测试用
@@ -45,8 +49,9 @@ public class BlogController {
     @RequestMapping("/queryById/{id}")
     public List queryById(@PathVariable int id)throws Exception{
         List list=blogService.queryById(id);
-        User user=userService.queryUser(id);
-        list.add(new User());
+        Blog blog=(Blog)list.get(0);
+        User user=userController.queryHead(blog.getBloggerName());
+        list.add(user);
         return list;
     }
 
