@@ -46,8 +46,8 @@ public class BlogController {
      * @param id
      * @return
      */
-    @RequestMapping("/queryById/{id}")
-    public List queryById(@PathVariable int id)throws Exception{
+    @RequestMapping("/queryById")
+    public List queryById(@RequestBody int id)throws Exception{
         List list=blogService.queryById(id);
         Blog blog=(Blog)list.get(0);
         User user=userController.queryHead(blog.getBloggerName());
@@ -174,6 +174,11 @@ public class BlogController {
             return true;
         }
         return false;
+    }
+
+    @RequestMapping("queryByBloggerId")
+    public List queryByBloggerId(int order,String input,int bloggerId){
+        return blogService.fuzzyQueryMyBlog(bloggerId,input,order);
     }
 
 

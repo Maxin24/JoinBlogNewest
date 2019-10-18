@@ -71,7 +71,6 @@ public class CommentController {
         for(int i=0;i<list.size();i++)
         {
             list.get(i).setUserurl(userController.queryHead(list.get(i).getUsername()).getHeadUrl());
-
         }
         return list;
     }

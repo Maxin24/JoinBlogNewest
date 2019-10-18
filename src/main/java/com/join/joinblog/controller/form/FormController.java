@@ -3,6 +3,7 @@ package com.join.joinblog.controller.form;
 import com.join.joinblog.entity.form.Form;
 import com.join.joinblog.service.form.FormService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description:
  * @Date: 12:03 2019/10/13
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/form")
 public class FormController {
