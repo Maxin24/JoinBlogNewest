@@ -61,4 +61,9 @@ public class BlogTest {
     public void testAddPv(){
         blogService.updatePvById(120);
     }
+
+    @Test
+    public void testFuzzyQueryMyBlog(){
+        System.out.println(blogService.fuzzyQueryMyBlog(1,"",0));
+    }
 }

@@ -27,7 +27,7 @@ public interface BlogMapper {
     List getSomeOrderByPv(@Param("num") int num);
     List getAllOrderByDate();
     List getSomeOrderByDate(@Param("num") int num);
-    List fuzzyQueryMyBLog(@Param("bloggerId")int bloggerId,@Param("input")String input,@Param("order")int order);
+    List fuzzyQueryMyBlog(@Param("bloggerId")int bloggerId,@Param("input")String input,@Param("order")int order);
     int[] getBlogIds();
 
     int updateTitleById(@Param("title") String title, @Param("id") int id);

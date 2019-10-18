@@ -99,7 +99,7 @@
 
     <select id="fuzzyQueryMyBlog" resultType="com.join.joinblog.entity.blog.Blog">
         select * from t_artical where bloggerId=#{bloggerId}
-        <if test="input != null">
+        <if test="input != null and input != ''">
             and title like "%"#{input}"%"
         </if>
         <if test="order == 0">

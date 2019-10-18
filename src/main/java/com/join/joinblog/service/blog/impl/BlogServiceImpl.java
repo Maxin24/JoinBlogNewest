@@ -133,4 +133,9 @@ public class BlogServiceImpl implements BlogService {
             return true;
         return false;
     }
+
+    @Override
+    public List fuzzyQueryMyBlog(int bloggerId, String input, int order) {
+        return blogMapper.fuzzyQueryMyBlog(bloggerId,input,order);
+    }
 }
