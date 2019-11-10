@@ -3,9 +3,11 @@ package com.join.joinblog.service.blog.impl;
 import com.join.joinblog.entity.blog.Blog;
 import com.join.joinblog.mapper.blog.BlogMapper;
 import com.join.joinblog.service.blog.BlogService;
+import com.join.joinblog.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +22,9 @@ public class BlogServiceImpl implements BlogService {
 
     @Autowired
     BlogMapper blogMapper;
+
+    @Resource
+    RedisUtil redisUtil;
 
     @Override
     public List fuzzyQueryByTitle(String title) {
@@ -41,7 +46,22 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Blog queryById(int id) {
-        return blogMapper.queryById(id);
+        Blog blog;
+        String key="blog_"+id;
+        boolean hasKey=redisUtil.hasKey(key);
+        if(hasKey){
+            long begin=System.currentTimeMillis();
+            blog=(Blog)redisUtil.get(key);
+            long end=System.currentTimeMillis();
+            System.out.println("查找redis，花费时间："+(end-begin)+"ms");
+        }else{
+            long begin=System.currentTimeMillis();
+            blog=blogMapper.queryById(id);
+            long end=System.currentTimeMillis();
+            System.out.println("查找mysql，花费时间："+(end-begin)+"ms");
+            redisUtil.set(key,blog);
+        }
+        return blog;
     }
 
     @Override
@@ -56,6 +76,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public int updatePvById(int id) {
+
         Blog blog=blogMapper.queryById(id);
         return blogMapper.updatePvById(blog.getPv()+1,id);
     }
@@ -77,15 +98,31 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public boolean deleteById(int id) {
-        if(blogMapper.deleteById(id)!=0)
+        String key="blog_"+id;
+        int result=blogMapper.deleteById(id);
+        if(result!=0) {
+            boolean hasKey = redisUtil.hasKey(key);
+            if (hasKey) {
+                redisUtil.del(key);
+            }
             return true;
+        }
         return false;
     }
 
     @Override
     public boolean updateTitleById(String title, int id) {
-        if(blogMapper.updateTitleById(title,id)!=0)
+        String key="blog_"+id;
+        int result=blogMapper.updateTitleById(title,id);
+        if(result!=0) {
+            boolean hasKey = redisUtil.hasKey(key);
+            if (hasKey) {
+                redisUtil.del(key);
+            }
+            Blog blog = blogMapper.queryById(id);
+            redisUtil.set(key, blog);
             return true;
+        }
         return false;
     }
 
